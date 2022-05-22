@@ -1,0 +1,17 @@
+services:
+  nginx-facade:
+    image: nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./config:/etc/nginx/templates
+    environment:
+      BASE_HOST: "${BASE_HOST:-localhost}"
+    restart: always
+    networks:
+      - nginx-facade
+
+networks:
+  nginx-facade:
+    name: nginx-facade

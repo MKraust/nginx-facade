@@ -1,0 +1,12 @@
+server {
+    listen 80;
+
+    server_name ~^(?<service_name>.+)\.${BASE_HOST}$;
+
+    location / {
+        resolver 127.0.0.11 valid=30s;
+        proxy_pass http://$service_name;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "Upgrade";
+    }
+}
